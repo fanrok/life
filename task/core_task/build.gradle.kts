@@ -1,20 +1,17 @@
 plugins {
     id("com.android.library")
-//    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
-    namespace = "com.example.database"
-    compileSdk = 34
+    namespace = "com.example.core_task"
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = 27
-        targetSdk = 34
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,16 +28,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
+    api(project(":task:core_task:core_task_api"))
+    implementation(project(":task:core_task:core_task_impl"))
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
