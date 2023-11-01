@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_task_api"
+    namespace = "com.example.core_ui"
     compileSdk = 33
 
     defaultConfig {
@@ -35,6 +35,12 @@ android {
 
 dependencies {
 
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
+    implementation(libs.core.ktx)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

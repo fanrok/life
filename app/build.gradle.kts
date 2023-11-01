@@ -50,8 +50,12 @@ android {
 
 dependencies {
     implementation(project(":database"))
+    implementation(project(":task:feature_tasks"))
+    implementation(project(":core_ui"))
+
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.navigation.compose)
     ksp(libs.androidx.room.compiler)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
