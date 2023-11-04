@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.core_ui.topBar.AppBarState
+import com.example.core_ui.topBar.TopAppBarMain
 import com.example.feature_tasks.ui.list.TaskList
 import com.example.life.ui.theme.LifeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,7 @@ fun MainContent(
 ) {
     val context = LocalContext.current
     var appBarState by remember {
-        mutableStateOf<AppBarState>(AppBarState())
+        mutableStateOf(AppBarState())
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -59,17 +60,7 @@ fun MainContent(
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            text = appBarState.title,
-                            color = Color.Black
-                        )
-                    },
-                    actions = {
-                        appBarState.actions?.invoke(this)
-                    }
-                )
+                TopAppBarMain(appBarState)
             },
             bottomBar = {
                 BottomAppBar() { }
@@ -80,7 +71,14 @@ fun MainContent(
                 navController = navController,
                 startDestination = "taskList"
             ) {
-                composable("taskList") { TaskList() }
+                composable("taskList") {
+                    TaskList(
+                        onComposing = {
+                            appBarState = it
+                        },
+                        navController = navController
+                    )
+                }
             }
         }
     }

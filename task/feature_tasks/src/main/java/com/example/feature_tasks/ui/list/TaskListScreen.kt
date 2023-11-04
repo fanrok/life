@@ -12,21 +12,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import com.example.core_ui.topBar.AppBarState
 
 @Composable
-fun TaskList() {
+fun TaskList(
+    onComposing: (AppBarState) -> Unit,
+    navController: NavHostController
+) {
     LaunchedEffect(key1 = true) {
-        AppBarState(
-            title = "TaskList",
-            actions = {
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = null
-                    )
+        onComposing (
+            AppBarState(
+                title = "TaskList",
+                actions = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = null
+                        )
+                    }
                 }
-            }
+            )
         )
     }
     Column(
