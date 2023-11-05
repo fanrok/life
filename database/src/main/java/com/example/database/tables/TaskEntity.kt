@@ -15,5 +15,5 @@ data class TaskEntity(
     val createDate: Date,
     val finishDate: Date,
     val isUrgently: Boolean,
-    val iiImportant: Boolean
+    val isImportant: Boolean
     )

@@ -37,11 +37,12 @@ android {
 
 dependencies {
     implementation(project(":task:core_task"))
-    
+
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

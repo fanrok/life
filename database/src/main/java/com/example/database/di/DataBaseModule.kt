@@ -1,4 +1,4 @@
-package com.example.life.di
+package com.example.database.di
 
 import android.content.Context
 import androidx.room.Room
@@ -25,7 +25,12 @@ object DataBaseModule {
         "LifeDB"
     ).build() // The reason we can construct a database for the repo
 
-//    @Singleton
-//    @Provides
-//    fun provideYourDao(db: AppDatabase) = db.getUserDao()
+    @Singleton
+    @Provides
+    fun provideUserDao(db: AppDatabase) = db.userDao()
+
+
+    @Singleton
+    @Provides
+    fun provideTaskDao(db: AppDatabase) = db.taskDao()
 }
