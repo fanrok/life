@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":task:core_task"))
+    
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
