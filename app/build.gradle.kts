@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":task:core_task"))
     implementation(project(":core_ui"))
     implementation(project(":core_common"))
+    implementation(project(":core_navigation"))
 
 
     implementation(libs.androidx.room.runtime)

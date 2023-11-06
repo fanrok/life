@@ -23,15 +23,19 @@ import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.core_ui.topBar.AppBarState
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.core_navigation.TaskScreens
+import com.example.feature_tasks.R
 
 @Composable
 fun TaskList(
     onComposing: (AppBarState) -> Unit,
-    navController: NavHostController,
+    navController: NavController,
     viewModel: TaskListViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -40,6 +44,7 @@ fun TaskList(
         onComposing (
             AppBarState(
                 title = "TaskList",
+                showIconBack = false,
                 actions = {
                     IconButton(onClick = { }) {
                         Icon(
@@ -67,6 +72,20 @@ fun TaskList(
                 )
                 Spacer(modifier = Modifier.height(2.dp))
             }
+        }
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.End,
+    )  {
+        IconButton(onClick = {
+            navController.navigate(TaskScreens.create)
+        }) {
+            Icon(
+                painter = painterResource(com.example.core_ui.R.drawable.plus),
+                contentDescription = null,
+            )
         }
     }
     state.errorMessage?.let{

@@ -44,6 +44,7 @@ android {
 dependencies {
     implementation(project(":core_ui"))
     implementation(project(":task:core_task"))
+    implementation(project(":core_navigation"))
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)

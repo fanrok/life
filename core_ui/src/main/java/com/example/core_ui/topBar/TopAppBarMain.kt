@@ -17,24 +17,30 @@ import androidx.compose.ui.graphics.Color
 fun TopAppBarMain(
     appBarState: AppBarState
 ){
-    TopAppBar(
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
-        navigationIcon = {
-            IconButton(onClick = { /* do something */ }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Localized description"
+    with(appBarState) {
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                titleContentColor = MaterialTheme.colorScheme.primary,
+            ),
+            navigationIcon = {
+                if(showIconBack) {
+                    IconButton(onClick = {
+
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                }
+            },
+            title = {
+                Text(
+                    text = title,
+                    color = Color.Black
                 )
             }
-        },
-        title = {
-            Text(
-                text = appBarState.title,
-                color = Color.Black
-            )
-        }
-    )
+        )
+    }
 }
