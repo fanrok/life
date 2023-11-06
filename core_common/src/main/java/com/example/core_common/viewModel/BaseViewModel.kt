@@ -1,11 +1,12 @@
 package com.example.core_common.viewModel
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.core_common.coroutines.DispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
@@ -13,13 +14,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-    protected abstract val dispatchers: Dispatchers
+    protected abstract val dispatchers: DispatchersProvider
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         handleError(exception)
@@ -28,7 +26,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected fun launch(
         job: Job = SupervisorJob(),
-        dispatcher: CoroutineDispatcher = dispatchers.IO,
+        dispatcher: CoroutineDispatcher = dispatchers.io,
         exceptionHandler: CoroutineExceptionHandler = handler,
         start: CoroutineStart = CoroutineStart.DEFAULT,
         block: suspend CoroutineScope.() -> Unit,
@@ -42,9 +40,7 @@ abstract class BaseViewModel : ViewModel() {
     ) = onEach { onNext(it) }
         .onCompletion { onComplete(it) }
         .catch { onError(it) }
-        .apply { launch {
-            collect()
-        } }
+        .launch()
 
     private fun <T> Flow<T>.launch(): Job = launch {
         collect()

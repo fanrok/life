@@ -1,5 +1,6 @@
 package com.example.database.impl.repo
 
+import com.example.core_common.mapIterable
 import com.example.core_task_api.domain.Task
 import com.example.core_task_api.repo.TaskRepo
 import com.example.database.dao.TaskDao
@@ -16,5 +17,5 @@ class TaskRepoImpl
         dao.getTaskListNow().map { it.mapToDomain() }
 
     override fun getTaskList(): Flow<List<Task>> =
-        dao.getTaskList().map {list -> list.map { it.mapToDomain() } }
+        dao.getTaskList().mapIterable { it.mapToDomain() }
 }

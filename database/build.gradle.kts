@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core_common"))
     implementation(project(":task:core_task"))
 
 

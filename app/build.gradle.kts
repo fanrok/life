@@ -51,7 +51,9 @@ android {
 dependencies {
     implementation(project(":database"))
     implementation(project(":task:feature_tasks"))
+    implementation(project(":task:core_task"))
     implementation(project(":core_ui"))
+    implementation(project(":core_common"))
 
 
     implementation(libs.androidx.room.runtime)
