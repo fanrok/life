@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.core_navigation.TaskScreens
 import com.example.core_ui.topBar.AppBarState
+import com.example.core_ui.topBar.AppState
 import com.example.core_ui.topBar.TopAppBarMain
 import com.example.life.ui.theme.LifeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,8 +48,8 @@ fun MainContent(
     navController: NavHostController
 ) {
     val context = LocalContext.current
-    var appBarState by remember {
-        mutableStateOf(AppBarState())
+    var appState by remember {
+        mutableStateOf(AppState())
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -56,11 +57,12 @@ fun MainContent(
     ) {
         Scaffold(
             topBar = {
-                TopAppBarMain(appBarState)
+                TopAppBarMain(appState.appBarState, navController)
             },
             bottomBar = {
                 BottomAppBar() { }
-            }
+            },
+            floatingActionButton = appState.fab
         ) { padding ->
             NavHost(
                 modifier = Modifier.padding(padding),
@@ -70,7 +72,7 @@ fun MainContent(
                 globalGraph(
                     context = context,
                     navController = navController,
-                    onAppBarState = { appBarState = it }
+                    onAppState = { appState = it }
                 )
             }
         }

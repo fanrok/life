@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.example.core_ui"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 27
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.navigation.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

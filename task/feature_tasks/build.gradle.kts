@@ -7,10 +7,10 @@ plugins {
 
 android {
     namespace = "com.example.feature_tasks"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 27
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.ui.tooling)
     ksp(libs.hilt.android.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
