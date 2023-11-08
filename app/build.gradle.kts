@@ -12,7 +12,6 @@ android {
     defaultConfig {
         applicationId = "com.example.life"
         minSdk = 27
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -49,7 +48,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":database"))
+    implementation(project(":core_data"))
+    implementation(project(":core_data:database"))
     implementation(project(":task:feature_tasks"))
     implementation(project(":task:core_task"))
     implementation(project(":core_ui"))

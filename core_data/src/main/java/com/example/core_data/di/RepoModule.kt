@@ -1,7 +1,7 @@
-package com.example.database.di
+package com.example.core_data.di
 
+import com.example.core_data.impl.repo.TaskRepoImpl
 import com.example.core_task_api.repo.TaskRepo
-import com.example.database.impl.repo.TaskRepoImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

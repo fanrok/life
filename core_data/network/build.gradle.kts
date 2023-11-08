@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_navigation"
+    namespace = "com.example.network"
     compileSdk = 34
 
     defaultConfig {

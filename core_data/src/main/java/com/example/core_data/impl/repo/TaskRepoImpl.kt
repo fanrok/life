@@ -1,12 +1,11 @@
-package com.example.database.impl.repo
+package com.example.core_data.impl.repo
 
 import com.example.core_common.mapIterable
+import com.example.core_data.impl.mappers.mapToDomain
 import com.example.core_task_api.domain.Task
 import com.example.core_task_api.repo.TaskRepo
 import com.example.database.dao.TaskDao
-import com.example.database.impl.mappers.mapToDomain
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TaskRepoImpl

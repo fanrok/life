@@ -35,10 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core_common"))
-    implementation(project(":task:core_task"))
-
-
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.room.runtime)

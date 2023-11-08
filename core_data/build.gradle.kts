@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.com.google.devtools.ksp)
+    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
-    namespace = "com.example.core_navigation"
+    namespace = "com.example.core_data"
     compileSdk = 34
 
     defaultConfig {
@@ -33,7 +35,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":core_common"))
+    implementation(project(":core_data:database"))
+    implementation(project(":task:core_task"))
 
+    implementation(libs.hilt.android)
+    implementation(project(mapOf("path" to ":core_data:database")))
+    ksp(libs.hilt.android.compiler)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

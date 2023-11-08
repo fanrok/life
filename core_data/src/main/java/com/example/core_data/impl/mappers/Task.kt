@@ -1,4 +1,4 @@
-package com.example.database.impl.mappers
+package com.example.core_data.impl.mappers
 
 import com.example.core_task_api.domain.Task
 import com.example.database.tables.TaskEntity
