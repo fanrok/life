@@ -1,5 +1,6 @@
 package com.example.life.di
 
+import com.example.core_common.di.AppDependencies
 import com.example.core_data.di.RepoModule
 import com.example.database.di.DataBaseModule
 import dagger.Component
@@ -13,7 +14,7 @@ import javax.inject.Singleton
         RepoModule::class
     ]
 )
-interface AppComponent {
+interface AppComponent: AppDependencies {
     @Component.Builder
     interface Builder {
         fun build(): AppComponent

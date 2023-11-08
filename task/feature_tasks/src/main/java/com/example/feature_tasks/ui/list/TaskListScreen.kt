@@ -27,19 +27,20 @@ import com.example.core_navigation.TaskScreens
 import com.example.core_task_api.domain.Task
 import com.example.core_ui.topBar.AppBarState
 import com.example.core_ui.topBar.AppState
+import com.example.feature_tasks.di.DaggerTaskComponent
 import java.util.Date
 
 @Composable
 fun TaskListScreen(
     onComposing: (AppState) -> Unit,
     navController: NavController,
-//    viewModel: TaskListViewModel = injectViewModel {
-//        DaggerTaskComponent.builder().build().getTaskListViewModel()
-//    }
+    viewModel: TaskListViewModel = injectViewModel {
+        DaggerTaskComponent.builder().build().getTaskListViewModel()
+    }
 ) {
     val context = LocalContext.current
-//    val state = viewModel.screenState.collectAsState().value
-    val state = TaskListState()
+    val state = viewModel.screenState.collectAsState().value
+//    val state = TaskListState()
     LaunchedEffect(key1 = true) {
         onComposing(
             AppState(
@@ -63,7 +64,7 @@ fun TaskListScreen(
             it,
             Toast.LENGTH_LONG
         ).show()
-//        viewModel.reserError()
+        viewModel.reserError()
     }
 }
 
