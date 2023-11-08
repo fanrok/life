@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
@@ -45,12 +44,12 @@ dependencies {
     implementation(project(":core_ui"))
     implementation(project(":task:core_task"))
     implementation(project(":core_navigation"))
+    implementation(project(":core_common"))
 
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.ui.tooling)
-    ksp(libs.hilt.android.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.graphics)
@@ -59,7 +58,6 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(project(mapOf("path" to ":core_common")))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

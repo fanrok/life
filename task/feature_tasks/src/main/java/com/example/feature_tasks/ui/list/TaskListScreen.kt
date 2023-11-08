@@ -9,10 +9,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,9 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.core_common.viewModel.injectViewModel
 import com.example.core_navigation.TaskScreens
 import com.example.core_task_api.domain.Task
 import com.example.core_ui.topBar.AppBarState
@@ -35,17 +33,20 @@ import java.util.Date
 fun TaskListScreen(
     onComposing: (AppState) -> Unit,
     navController: NavController,
-    viewModel: TaskListViewModel = hiltViewModel()
+//    viewModel: TaskListViewModel = injectViewModel {
+//        DaggerTaskComponent.builder().build().getTaskListViewModel()
+//    }
 ) {
     val context = LocalContext.current
-    val state = viewModel.screenState.collectAsState().value
+//    val state = viewModel.screenState.collectAsState().value
+    val state = TaskListState()
     LaunchedEffect(key1 = true) {
         onComposing(
             AppState(
                 appBarState = AppBarState(
                     title = "TaskList",
                     showIconBack = false,
-                    actions = {}                ),
+                    actions = {}),
                 fab = {
                     FloatingActionButton(
                         onClick = { navController.navigate(TaskScreens.create) },
@@ -62,7 +63,7 @@ fun TaskListScreen(
             it,
             Toast.LENGTH_LONG
         ).show()
-        viewModel.reserError()
+//        viewModel.reserError()
     }
 }
 

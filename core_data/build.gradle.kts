@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
@@ -26,11 +25,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -38,10 +37,11 @@ dependencies {
     implementation(project(":core_common"))
     implementation(project(":core_data:database"))
     implementation(project(":task:core_task"))
+    implementation(project(":core_data:database"))
 
-    implementation(libs.hilt.android)
-    implementation(project(mapOf("path" to ":core_data:database")))
-    ksp(libs.hilt.android.compiler)
+
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

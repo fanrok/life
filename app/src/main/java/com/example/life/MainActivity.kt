@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -21,13 +20,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.core_navigation.TaskScreens
-import com.example.core_ui.topBar.AppBarState
 import com.example.core_ui.topBar.AppState
 import com.example.core_ui.topBar.TopAppBarMain
 import com.example.life.ui.theme.LifeTheme
-import dagger.hilt.android.AndroidEntryPoint
-
-@AndroidEntryPoint
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +35,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
+// Затащить даггер, возможно инжектор компонентов, сделать навигацию для компоста
 @Composable
 @Suppress("LongMethod")
 fun MainContent(
