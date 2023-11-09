@@ -5,7 +5,11 @@ import com.example.core_common.coroutines.DispatchersProvider
 
 interface AppDependencies {
 
-//    fun provideContext(): Context
+    fun provideContext(): Context
 
     fun provideDispatchers(): DispatchersProvider
+}
+
+interface AppDependenciesProvider{
+    fun provideAppDependencies():AppDependencies
 }
