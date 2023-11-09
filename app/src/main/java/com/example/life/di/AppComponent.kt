@@ -18,13 +18,6 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent: AppDependencies, CoreTaskDependencies {
-
-//    companion object {
-//        fun create(context: Context): AppComponent =
-//            DaggerAppComponent.builder()
-//                .setContext(context)
-//                .build()
-//    }
     @Component.Builder
     interface Builder {
         @BindsInstance

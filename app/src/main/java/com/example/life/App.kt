@@ -13,7 +13,6 @@ class App : Application(), AppDependenciesProvider, CoreTaskDependenciesProvider
     private lateinit var appComponent: AppComponent
     override fun onCreate() {
         super.onCreate()
-//        appComponent = AppComponent.create(applicationContext)
         appComponent = DaggerAppComponent.builder().setContext(applicationContext).build()
     }
 
