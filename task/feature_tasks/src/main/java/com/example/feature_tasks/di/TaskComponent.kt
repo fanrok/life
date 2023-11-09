@@ -18,7 +18,6 @@ interface TaskComponent {
 
     @Component.Builder
     interface Builder {
-
         fun appDependencies(dependencies: AppDependencies): Builder
         fun coreTaskDependencies(dependencies: CoreTaskDependencies): Builder
         fun build(): TaskComponent
