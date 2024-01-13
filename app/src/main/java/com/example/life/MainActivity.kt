@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.core_navigation.TaskScreens
+import com.example.core_navigation.base.TaskListScreenRoute
 import com.example.core_ui.topBar.AppState
 import com.example.core_ui.topBar.TopAppBarMain
 import com.example.life.ui.theme.LifeTheme
@@ -61,7 +62,7 @@ fun MainContent(
             NavHost(
                 modifier = Modifier.padding(padding),
                 navController = navController,
-                startDestination = TaskScreens.list
+                startDestination = TaskListScreenRoute.route
             ) {
                 globalGraph(
                     context = context,

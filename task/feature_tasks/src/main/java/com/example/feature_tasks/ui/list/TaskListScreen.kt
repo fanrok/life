@@ -1,6 +1,7 @@
 package com.example.feature_tasks.ui.list
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,7 +26,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.core_common.di.AppDependencies
 import com.example.core_common.di.AppDependenciesProvider
 import com.example.core_common.viewModel.injectViewModel
+import com.example.core_navigation.TaskCreateDestination
 import com.example.core_navigation.TaskScreens
+import com.example.core_navigation.base.TaskCreateScreenRoute
+import com.example.core_navigation.base.TaskDetailScreenRoute
 import com.example.core_task_api.domain.Task
 import com.example.core_ui.topBar.AppBarState
 import com.example.core_ui.topBar.AppState
@@ -57,7 +61,7 @@ fun TaskListScreen(
                     actions = {}),
                 fab = {
                     FloatingActionButton(
-                        onClick = { navController.navigate(TaskScreens.create) },
+                        onClick = { navController.navigate(TaskCreateScreenRoute()) },
                         content = { Icon(Icons.Filled.Add, "") }
                     )
                 }
@@ -71,7 +75,7 @@ fun TaskListScreen(
             it,
             Toast.LENGTH_LONG
         ).show()
-//        viewModel.reserError()
+        viewModel.resetError()
     }
 }
 
@@ -93,8 +97,12 @@ private fun TaskList(
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = item.title,
+                    modifier = Modifier.clickable {
+                        navController.navigate(TaskDetailScreenRoute(item.id))
+                    }
                 )
                 Spacer(modifier = Modifier.height(2.dp))
+
             }
         }
     }

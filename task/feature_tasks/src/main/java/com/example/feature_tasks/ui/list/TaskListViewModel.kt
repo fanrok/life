@@ -4,10 +4,13 @@ import android.util.Log
 import com.example.core_common.coroutines.DispatchersProvider
 import com.example.core_common.scope.FeatureScope
 import com.example.core_common.viewModel.BaseViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @FeatureScope
@@ -37,7 +40,7 @@ class TaskListViewModel @Inject constructor(
         }
     }
 
-    fun reserError() {
+    fun resetError() {
         _screenState.update {
             it.copy(
                 errorMessage = null

@@ -42,6 +42,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", vers
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version = "2.7.5" }
 dagger = { group = "com.google.dagger", name = "dagger", version = "2.48.1" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version = "2.48.1" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version = "2.7.5" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
