@@ -1,42 +1,139 @@
 package com.example.feature_tasks.ui.list
 
-import androidx.compose.foundation.layout.Arrangement
+import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.core_common.di.AppDependencies
+import com.example.core_common.di.AppDependenciesProvider
+import com.example.core_common.viewModel.injectViewModel
+import com.example.core_navigation.TaskCreateDestination
+import com.example.core_navigation.TaskScreens
+import com.example.core_navigation.base.TaskCreateScreenRoute
+import com.example.core_navigation.base.TaskDetailScreenRoute
+import com.example.core_task_api.domain.Task
 import com.example.core_ui.topBar.AppBarState
+import com.example.core_ui.topBar.AppState
+import com.example.feature_tasks.di.DaggerTaskComponent
+import com.example.feature_tasks.di.TaskComponent
+import java.util.Date
 
 @Composable
-fun TaskList() {
+fun TaskListScreen(
+    onComposing: (AppState) -> Unit,
+    navController: NavController,
+
+) {
+    val context = LocalContext.current
+    val viewModel: TaskListViewModel = injectViewModel {
+        TaskComponent
+            .getOrCreate(context)
+            .getTaskListViewModel()
+    }
+//    val context = LocalContext.current
+    val state = viewModel.screenState.collectAsState().value
+//    val state = TaskListState()
     LaunchedEffect(key1 = true) {
-        AppBarState(
-            title = "TaskList",
-            actions = {
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = null
+        onComposing(
+            AppState(
+                appBarState = AppBarState(
+                    title = "TaskList",
+                    showIconBack = false,
+                    actions = {}),
+                fab = {
+                    FloatingActionButton(
+                        onClick = { navController.navigate(TaskCreateScreenRoute()) },
+                        content = { Icon(Icons.Filled.Add, "") }
                     )
                 }
-            }
+            )
         )
     }
+    TaskList(state, navController)
+    state.errorMessage?.let {
+        Toast.makeText(
+            context,
+            it,
+            Toast.LENGTH_LONG
+        ).show()
+        viewModel.resetError()
+    }
+}
+
+@Composable
+private fun TaskList(
+    state: TaskListState,
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.Start,
     ) {
         Text(
-           text = "TaskList"
+            text = "TaskList"
         )
+        LazyColumn {
+            items(state.tasksList) { item ->
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = item.title,
+                    modifier = Modifier.clickable {
+                        navController.navigate(TaskDetailScreenRoute(item.id))
+                    }
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+
+            }
+        }
     }
+}
+
+
+@Composable
+@Preview
+fun TaskListPrev() {
+    TaskList(
+        TaskListState(
+            errorMessage = null,
+            tasksList = listOf(
+                Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ),
+                Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ), Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ), Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ), Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ), Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                ), Task(
+                    "", "hihihi", "", Date(), Date(), false, false
+                )
+            )
+        ),
+        rememberNavController()
+    )
 }
