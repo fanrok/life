@@ -8,10 +8,10 @@ plugins {
 
 android {
     namespace = "com.example.database"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 27
+        minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

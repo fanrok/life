@@ -3,15 +3,16 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.example.life"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.life"
-        minSdk = 27
+        minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -38,9 +39,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
-    }
+    
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
